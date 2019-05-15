@@ -17,7 +17,7 @@
  -   index:'path',//多入口
  -   mian:'path',//多入口
  -   echart:'echarts',//公共包
- -}
+ - }
  ### output(出口)
  - output:{
  -   filename:'[name].[hash:6].js',// 文件后接的6位hash值
