@@ -7,4 +7,7 @@
  - npm install html-webpack-plugin -D; // webapck插件 自动产出html
  - npm install clean-webpack-plugin -D; // 清空目录 打包时清除先前的文件
  - npm install uglifyjs-webpack-plugin -D; // 打包时进行js文件压缩
-   #### 解析loader
+   #### loader
+ - npm install css-loader  -D; // 处理css中的img路径...
+ - npm install style-loader -D; // 生成style插入head 
+ 
