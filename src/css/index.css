@@ -1,0 +1,27 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+html{
+  height: 100%;
+}
+body{
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #c7d9dd
+}
+.app{
+  cursor: pointer;
+  color:#586a78;
+  padding: 12px 15px;
+  background-color: #c7e1d4;
+  border: 1px solid #eab1a2;
+  border-radius: 4px;
+  transition:all .5s
+}
+.app:hover{
+  background-color: #eab1a2;
+  color:#fcfafb
+}
