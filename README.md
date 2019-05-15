@@ -18,11 +18,20 @@
  -   mian:'path',//多入口
  -   echart:'echarts',//公共包
  -}
- ### ouput(出口)
+ ### output(出口)
  - output:{
  -   filename:'[name].[hash:6].js',// 文件后接的6位hash值
  -   path:path.join(__dirname,'dist') // 只能是绝对路径 
  - }
  ### module(配置规则...)
+ - module:{
+ -   rules:[
+ -     {
+ -       test:/\.css/,
+ -       //css-loader 处理路径 style-loader 生成style插入head
+ -       loader:["style-loader","css-loader"],
+ -     },  
+ -  ]
+ - },
  ### plugins(weboack 插件)
  ### devServer(开发环境配置)
