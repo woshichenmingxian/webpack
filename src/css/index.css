@@ -10,7 +10,8 @@ body{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #c7d9dd
+  background-color: #c7d9dd;
+  background-image: url(../image/test.jpeg);
 }
 .app{
   cursor: pointer;
