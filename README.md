@@ -11,7 +11,13 @@
  - npm install css-loader  -D; // 处理css中的img路径...
  - npm install style-loader -D; // 生成style插入head 
 ## webpack.config.js 配置
- ### entry(入口)
+ ### entry(入口) 
+   ### entry：'path' || {} || [] 
+ - entry:{
+ -   index:'path',//多入口
+ -   mian:'path',//多入口
+ -
+ -}
  ### ouput(出口)
  ### module(配置规则...)
  ### plugins(weboack 插件)
