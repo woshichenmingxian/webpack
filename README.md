@@ -12,13 +12,17 @@
  - npm install style-loader -D; // 生成style插入head 
 ## webpack.config.js 配置
  ### entry(入口) 
-   ### entry：'path' || {} || [] 
+   ### entry：'' || {} || [] 
  - entry:{
  -   index:'path',//多入口
  -   mian:'path',//多入口
- -
+ -   echart:'echarts',//公共包
  -}
  ### ouput(出口)
+ - output:{
+ -   filename:'[name].[hash:6].js',// 文件后接的6位hash值
+ -   path:path.join(__dirname,'dist') // 只能是绝对路径 
+ - }
  ### module(配置规则...)
  ### plugins(weboack 插件)
  ### devServer(开发环境配置)
