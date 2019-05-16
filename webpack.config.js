@@ -14,7 +14,7 @@ module.exports = {
   entry: {
     index: './src/main.js',
     mian: './src/second-main.js',
-    // echart: 'echarts'
+    echart: 'echarts'
   },
   //一个出口
   output: {
@@ -34,14 +34,18 @@ module.exports = {
       },
       {
         test:/\.js/,
-        use:{
-          loader:'babel-loader',
-          query:{
-            presets:["env","stage-0","react"]
+        //参数写法
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', {
+                targets: {
+                  browsers: ['> 1%', 'last 2 versions']
+                }
+              }]
+            ]
           }
-          // options:{
-            
-          // }
         }
       },
       {
