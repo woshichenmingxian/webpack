@@ -3,14 +3,18 @@ let HtmlWepackPlugin = require('html-webpack-plugin'); //webapck插件 自动产
 let cleanWebpackPlugin = require('clean-webpack-plugin'); //清除目录 打包前先前的文件
 let webpack = require('webpack');
 let uglifyjsPlugin = require('uglifyjs-webpack-plugin'); //打包时进行js文件压缩
-let utils = require('util');
+let extractTextWebpackPlugin =require('extract-text-webpack-plugin');//抽离css样式,防止将样式打包在js中引起页面样式加载错乱的现象
+
+
+let cssExtract=new extractTextWebpackPlugin('css.css');//分别提取css
+let sassExtract=new extractTextWebpackPlugin('sass.css');//分别提取sass
 
 module.exports = {
   //多入口 会生成chunk，最后进入系统中Asserts
   entry: {
     index: './src/main.js',
     mian: './src/second-main.js',
-    echart: 'echarts'
+    // echart: 'echarts'
   },
   //一个出口
   output: {
@@ -21,12 +25,35 @@ module.exports = {
     rules: [{
         test: /\.css/,
         //css-loader 处理路径 style-loader 生成style插入head
-        loader: ["style-loader", "css-loader"],
+        // loader: ["style-loader", "css-loader"],
+        //此插件经过css-loader处理
+        loader:cssExtract.extract({
+          fallback: "style-loader",
+          use:["css-loader","postcss-loader"]
+        })
+      },
+      {
+        test:/\.js/,
+        use:{
+          loader:'babel-loader',
+          query:{
+            presets:["env","stage-0","react"]
+          }
+          // options:{
+            
+          // }
+        }
       },
       {
         test: /\.scss/,
         //css-loader 处理路径 style-loader 生成style插入head
-        loader: ["style-loader", "css-loader", "sass-loader"],
+        // loader: ["style-loader", "css-loader", "sass-loader"],
+         //此插件经过css-loader处理然后sass-loader
+         loader:sassExtract.extract({
+          fallback: "style-loader",// 这里表示不提取的时候，使用什么样的配置来处理css
+          // filename: '[name].min.css', // 配置提取出来的css名称
+          use:["css-loader","sass-loader"]//顺序很重要
+        })
       },
       {
         //file-loader解析图片地址，吧图片从源位置拷贝到目标位置并且修改原引用地址
@@ -39,10 +66,10 @@ module.exports = {
         loader: 'url-loader', //图片较小的时候，直接打包成base64字符串内嵌网页中
         //参数
         options: {
-          // limit: 100000, //9K url-loader搭配
+          limit: 100000, //最大能打包成base64图片大小100000B url-loader搭配
           // name: utils.assetsPath('img/[name].[hash:7].[ext]'),
           //指定拷贝文件的输出目录
-          outputPath: '/images'
+          outputPath: 'images'
         }
 
         // }
@@ -57,6 +84,8 @@ module.exports = {
   },
 
   plugins: [
+    cssExtract,//分别提取css
+    sassExtract,//分别提取sass
     //注入全局Echart变量
     new webpack.ProvidePlugin({
       'Echart': 'echarts'
