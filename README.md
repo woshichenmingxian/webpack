@@ -30,7 +30,7 @@
  -     {
  -       test:/\.css/,
  -       //css-loader 处理css中img路径... style-loader 生成style插入head
- -       loader:["style-loader","css-loader"],
+ -       loader:["style-loader","css-loader"],//顺序很重要，理由见下(loader仿写栏)
  -     },  
  -  ]
  - },
