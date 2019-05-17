@@ -100,6 +100,7 @@
  ### 仿写loader
    ## 说明
    - loader文件也是作为node一个模块，内容是个函数，必须返回Buffer || string，可以直接return 或者在模块内通过：this.async(null,source) || this.callback(null,source) 回调中内设
+   
   ### webpack.config.js
   - module.exports={
   - entry:{
@@ -125,15 +126,16 @@
     - ]
   - }
 - }
-  ### test-loader.js
+
+ ### test-loader.js
   - module.exports=function(source){
   - // sourcer webpack运行时传入的源代码
   -   console.log(source)
   - //创建一个style标签并且内容innerText=${JSON.stringify(source)} 之后添加到head中，最后在retrun出来，这个也是style-loader的原理：注有关css的文件build都需要相对的loader外，style-loader && css-loader是必须的
   -   let script=(`
-  -     let style=document.createElement("style");
-  -     style.innerText=${JSON.stringify(source)}
-  -     document.head.appendChild(style)
-  -   `);
+       - let style=document.createElement("style");
+       - style.innerText=${JSON.stringify(source)}
+       - document.head.appendChild(style)
+  - `);
   -   return script
   - }
