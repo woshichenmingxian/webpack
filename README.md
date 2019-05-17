@@ -7,7 +7,7 @@
  - npm install html-webpack-plugin -D; // webapck插件 自动产出html
  - npm install clean-webpack-plugin -D; // 清空目录 打包时清除先前的文件
  - npm install uglifyjs-webpack-plugin -D; // 打包时进行js文件压缩
-   #### 解析器 loader
+   #### 解析器 loader 上loader文件夹有仿写简单的loader 说明后方
  - npm install css-loader  -D; // 处理css中的img路径...
  - npm install style-loader -D; // 生成style插入head 
 ## webpack.config.js 配置
@@ -96,3 +96,7 @@
  -   port:"3000",//端口
  -   compress:true,//启用gzip压缩
  - }
+ 
+ ### 仿写loader
+   ## 说明
+   - loader文件也是作为node一个模块，内容是个函数，必须返回Buffer || string，可以直接return 或者在模块内通过：this.async(null,source) || this.callback(null,source) 回调中内设
