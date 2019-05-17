@@ -97,8 +97,8 @@
  -   compress:true,//启用gzip压缩
  - }
  
- ### 仿写loader
-   ## 说明
+ ## 仿写loader
+   ### 说明
    - loader文件也是作为node一个模块，内容是个函数，必须返回Buffer || string，可以直接return 或者在模块内通过：this.async(null,source) || this.callback(null,source) 回调中内设
    
   ### webpack.config.js
