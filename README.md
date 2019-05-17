@@ -121,21 +121,18 @@
     - rules:[
       - {
         - test:/\.less$/,
-        - loader:["test-loader", "css-loader",'less-loader']//模块是先右至左传入loader，经每个loader解析，解析后的source代码传入下个loader
+        - loader:["style-loader", "css-loader",'test-loader']//模块是先右至左传入loader，经每个loader解析，解析后的source代码传入下个loader
       - }
     - ]
   - }
 - }
 
  ### test-loader.js
-  - module.exports=function(source){
-  - // sourcer webpack运行时传入的源代码
-  -   console.log(source)
-  - //创建一个style标签并且内容innerText=${JSON.stringify(source)} 之后添加到head中，最后在retrun出来，这个也是style-loader的原理：注有关css的文件build都需要相对的loader外，style-loader && css-loader是必须的
-  -   let script=(`
-       - let style=document.createElement("style");
-       - style.innerText=${JSON.stringify(source)}
-       - document.head.appendChild(style)
-  - `);
-  -   return script //this.callback(script)
+ - let less=require('less');
+ - //source为上个loader解析后的代码，如此loader为第一个解析那source是项目的源码
+- module.exports=function(source){
+  - less.render(source,(e,res)=>{
+  - console.log(e)
+  - this.callback(e,res.css) //return res.css
+  - })
   - }
