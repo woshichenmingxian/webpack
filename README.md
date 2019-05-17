@@ -98,7 +98,7 @@
  - }
  
  ## 仿写loader
-   ### 说明
+   ### 说明 (代码拆分解析成需要的代码结构)
    - loader文件也是作为node一个模块，内容是个函数，必须返回Buffer || string，可以直接return 或者在模块内通过：this.async(null,source) || this.callback(null,source) 回调
    
   ### webpack.config.js
