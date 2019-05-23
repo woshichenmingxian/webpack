@@ -31,7 +31,7 @@
 ## package.json
  - "scripts": {
      - "dev": "webpack-dev-server --mode development",//webpack-dev-server也需要安装
-     - "build": "webpack --mode development"
+     - "build": "webpack --mode development" //--注入变量 
  - },
  
 ## webpack.config.js 配置
