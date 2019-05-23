@@ -27,6 +27,13 @@
    #### 解析器 loader根据需求进行安装 上loader文件夹有仿写简单的loader 说明后方
  - npm install css-loader  -D; // 处理css
  - npm install style-loader -D; // 生成style插入head 
+ 
+## package.json
+ - "scripts": {
+     - "dev": "webpack-dev-server --mode development",//webpack-dev-server也需要安装
+     - "build": "webpack --mode development"
+ - },
+ 
 ## webpack.config.js 配置
  ### entry(入口) 
    ### entry：'' || {} || [] 
