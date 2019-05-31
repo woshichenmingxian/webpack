@@ -168,30 +168,33 @@
   - })
   - }
   
-  ### testLog.js
-  - class showLog{
-    - apply(compiler){
-      - // 对于能够使用了 AsyncHook(异步钩子) 周期函数 可以使用 tapAsync 或 tapPromise（以及 tap）：
-      - //compilation 对象包含了当前的模块资源，编译生成资源，变化的文件等。在开发模式下
-      - // callback类似中间件的next回调进行下一部解析
-      - compiler.hooks.emit.tapAsync('PluginName',(compilation, callback)=>{
-        - console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>compilation<<<<<<<<<<<<<<<<<<<<<<<<`)
-        - //compilation.assets 读取文件夹(dist)
-        - for(let key in compilation.assets){
-          - console.log(key)
-        - }
+### testLog.js 
+#### plugin 插件对象里有个apply方法，绑定事件会一一订阅 然后进行钩子回调(发布)进行通知，
+- class showLog{
+  - apply(compiler){
+    - compiler 模块是 webpack 的支柱引擎，它通过 CLI 或 Node API 传递的所有选项，创建出一个 compilation 实例
+    - hooks：相关的钩子 请参考 https://webpack.docschina.org/api/compiler-hooks/#emit
+    - // 对于能够使用了 AsyncHook(异步钩子) 周期函数 可以使用 tapAsync 或 tapPromise（以及 tap）：
+    - //compilation 对象包含了当前的模块资源，编译生成资源，变化的文件等。在开发模式下
+    - // callback类似中间件的next回调进行下一步函数解析
+    - compiler.hooks.emit.tapAsync('PluginName',(compilation, callback)=>{
+      - console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>compilation<<<<<<<<<<<<<<<<<<<<<<<<`)
+      - //compilation.assets 读取文件夹(dist)
+      - for(let key in compilation.assets){
+        - console.log(key)
+      - }
 
-        - compilation.assets['chry.text']={
-          - source:function(){
-            - return 'LBB 他妈的'
-          - },
-          - size:function(){
-            - return 'LBB 他妈的'.length
-          - }
+      - compilation.assets['chry.text']={
+        - source:function(){
+          - return 'LBB 他妈的'
+        - },
+        - size:function(){
+          - return 'LBB 他妈的'.length
         - }
-        - console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>完成<<<<<<<<<<<<<<<<<<<<<<<<`)
-        - callback()
-      - })
-    - }
+      - }
+      - console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>完成<<<<<<<<<<<<<<<<<<<<<<<<`)
+      - callback()
+    - })
   - }
+- }
 - module.exports=showLog;
