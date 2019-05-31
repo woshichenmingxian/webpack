@@ -127,6 +127,9 @@
    - loader文件也是作为node一个模块，内容是个函数，必须返回Buffer || string，可以直接return 或者在模块内通过：this.async(null,source) || this.callback(null,source) 回调
    
   ### webpack.config.js
+  
+  - let testLog=require('./xxxx');
+  
   - module.exports={
   - entry:{
     - index:"./src/main.js"
@@ -149,7 +152,10 @@
         - loader:["style-loader", "css-loader",'test-loader']//模块是先右至左传入loader，经每个loader解析，解析后的source代码传入下个loader
       - }
     - ]
-  - }
+  - },
+  - plugins:[
+     - new testLog(),//手写代码如下
+  - ]
 - }
 
  ### test-loader.js
@@ -161,3 +167,31 @@
   - this.callback(e,res.css) //return res.css
   - })
   - }
+  
+  ### testLog.js
+  - class showLog{
+    - apply(compiler){
+      - // 对于能够使用了 AsyncHook(异步钩子) 周期函数 可以使用 tapAsync 或 tapPromise（以及 tap）：
+      - //compilation 对象包含了当前的模块资源，编译生成资源，变化的文件等。在开发模式下
+      - // callback类似中间件的next回调进行下一部解析
+      - compiler.hooks.emit.tapAsync('PluginName',(compilation, callback)=>{
+        - console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>compilation<<<<<<<<<<<<<<<<<<<<<<<<`)
+        - //compilation.assets 读取文件夹(dist)
+        - for(let key in compilation.assets){
+          - console.log(key)
+        - }
+
+        - compilation.assets['chry.text']={
+          - source:function(){
+            - return 'LBB 他妈的'
+          - },
+          - size:function(){
+            - return 'LBB 他妈的'.length
+          - }
+        - }
+        - console.log(`>>>>>>>>>>>>>>>>>>>>>>>>>>>完成<<<<<<<<<<<<<<<<<<<<<<<<`)
+        - callback()
+      - })
+    - }
+  - }
+- module.exports=showLog;
