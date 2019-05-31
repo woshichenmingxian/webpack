@@ -6,6 +6,7 @@
 - loader 文件转换器，例如把es6转换为es5，scss转换为css。
 - plugin 插件，用于扩展webpack的功能，在webpack构建生命周期的节点上加入扩展hook为webpack加入功能。
 ### webpack构建流程
+#### 初始化配置参数 -> 绑定事件钩子回调 -> 确定Entry逐一遍历 -> 使用loader编译文件 -> 输出文件
 - 从启动webpack构建到输出结果经历了一系列过程，它们是：
 - 解析webpack配置参数，合并从shell传入和webpack.config.js文件里配置的参数，生产最后的配置结果。
 - 注册所有配置的插件，好让插件监听webpack构建生命周期的事件节点，以做出对应的反应。
