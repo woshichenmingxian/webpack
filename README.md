@@ -183,7 +183,7 @@
       - for(let key in compilation.assets){
         - console.log(key)
       - }
-
+      - // 往compilation.assets['chry.text']文件修改内容，如果不存在 会新建文件
       - compilation.assets['chry.text']={
         - source:function(){
           - return 'LBB 他妈的'
